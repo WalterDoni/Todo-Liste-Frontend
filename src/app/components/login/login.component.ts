@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { environment } from 'src/environments/environment.development';
 
 @Component({
   selector: 'app-login',
@@ -25,7 +26,7 @@ export class LoginComponent {
       redirect: 'follow',
     };
     try {
-      let resp = await fetch('http://127.0.0.1:8000/login/', requestOptions);
+      let resp = await fetch( environment.baseUrl + '/login/', requestOptions);
       let json = await resp.json();
       localStorage.setItem('token', json.token)  
     } catch(e){
@@ -33,4 +34,11 @@ export class LoginComponent {
      
     }
   }
+
+
+  login(){
+    
+  }
+
+
 }
