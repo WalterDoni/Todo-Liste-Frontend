@@ -1,5 +1,7 @@
+
 import { Component } from '@angular/core';
-import { environment } from 'src/environments/environment.development';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -10,34 +12,18 @@ export class LoginComponent {
   username: string = '';
   password: string = '';
 
-  async loginWithUsernameAndPassword() {
-    const myHeaders = new Headers();
-    myHeaders.append('Content-Type', 'application/json');
+  constructor(private auth:AuthService, private router: Router){}
 
-    const raw = JSON.stringify({
-      username: this.username,
-      password: this.password,
-    });
-
-    const requestOptions: RequestInit = {
-      method: 'POST',
-      headers: myHeaders,
-      body: raw,
-      redirect: 'follow',
-    };
+  async login() {
     try {
-      let resp = await fetch( environment.baseUrl + '/login/', requestOptions);
-      let json = await resp.json();
-      localStorage.setItem('token', json.token)  
+      let resp = await this.auth.loginWithUsernameAndPassword(this.username, this.password)
+      console.log(resp);
+      this.router.navigateByUrl('/todos')
     } catch(e){
+     alert('Falsche Daten')
      console.log(e);
-     
+
     }
-  }
-
-
-  login(){
-    
   }
 
 
