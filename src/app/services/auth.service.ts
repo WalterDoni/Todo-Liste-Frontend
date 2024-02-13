@@ -10,8 +10,6 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-
-  
   public loginWithUsernameAndPassword(username:string, password:string){
     const url = environment.baseUrl + '/login/';
     const body = {
