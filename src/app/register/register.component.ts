@@ -27,10 +27,8 @@ export class RegisterComponent {
       console.log('Registration successful:', resp);
       this.router.navigateByUrl('/login');
     } catch (e) {
-      debugger
       console.error('Error during registration:', e);
       alert('Fehler aufgetreten:');
-      console.log(e);
     }
   }
 
